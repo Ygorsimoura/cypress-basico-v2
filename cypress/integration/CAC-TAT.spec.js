@@ -22,4 +22,12 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .get('button.button').click()
           .get('span.success').should('be.visible')
     })
+    it('exibe menssagem de erro ao submeter o formulário com um e-mail com formatacão inválida', function(){
+        cy.get('input#firstName').type('Ygor')
+          .get('input#lastName').type('Simoura')
+          .get('input#email').type('ygorsimouragmail.com')
+          .get('textarea#open-text-area').type('teste', { delay: 0})
+          .get('button.button').click()
+            .get('span.error').should('be.visible')
+    })
 })
