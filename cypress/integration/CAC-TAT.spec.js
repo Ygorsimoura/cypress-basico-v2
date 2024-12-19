@@ -27,7 +27,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .get('input#lastName').type('Simoura')
           .get('input#email').type('ygorsimouragmail.com')
           .get('textarea#open-text-area').type('teste', { delay: 0})
-          .get('button.button').click()
+        cy.contains('button', 'Enviar').click()
           .get('span.error').should('be.visible')
     })
     it('campo de telefone continua vazio quando preechido com valor não numérico', function() {
@@ -41,7 +41,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .get('input#email').type('ygorsimoura@gmail.com')
           .get('#phone-checkbox').click()
           .get('textarea#open-text-area').type('teste', { delay: 0})
-          .get('button.button').click()
+        cy.contains('button', 'Enviar').click()
           .get('span.error').should('be.visible')
 
     })
@@ -65,7 +65,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
    
     })
     it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
-        cy.get('button[type="submit"]')
+        cy.contains('button', 'Enviar')
           .click()
           .get('span.error').should('be.visible')
     })
