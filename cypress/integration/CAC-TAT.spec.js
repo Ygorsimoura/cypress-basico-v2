@@ -14,10 +14,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         cy.title().should('be.equal','Central de Atendimento ao Cliente TAT')
     })
     it('preencher os campos obrigatórios e envia o formulário', function() {
+       const longText = 'Lorem ipsum dolor sit amet. Id nostrum placeat in autem iusto et adipisci itaque et assumenda animi in nihil esse est voluptatem nulla? Ab quibusdam perferendis sed aspernatur repudiandae aut eligendi enim sit saepe autem.'
         cy.get('input#firstName').type('Ygor')
           .get('input#lastName').type('Simoura')
           .get('input#email').type('ygorsimoura@gmail.com')
-          .get('textarea#open-text-area').type('Escrevendo apenas um teste')
+          .get('textarea#open-text-area').type(longText, { delay: 0})
           .get('button.button').click()
           .get('span.success').should('be.visible')
     })
