@@ -28,6 +28,11 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .get('input#email').type('ygorsimouragmail.com')
           .get('textarea#open-text-area').type('teste', { delay: 0})
           .get('button.button').click()
-            .get('span.error').should('be.visible')
+          .get('span.error').should('be.visible')
+    })
+    it.only('campo de telefone continua vazio quando preechido com valor não numérico', function() {
+        cy.get('#phone')
+          .type('abcdefg')
+          .should('have.value', '')
     })
 })
