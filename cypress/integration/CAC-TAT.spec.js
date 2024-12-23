@@ -76,7 +76,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
    
     })
     Cypress._.times(4, function() { 
-      it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+      it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
       cy.clock()  
       cy.contains('button', 'Enviar')
           .click()
@@ -85,7 +85,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       .get('span.error').should('not.be.visible')
       })
     })
-        it('envia formulário com sucesso usando um comando costomizado', function(){
+      it('envia formulário com sucesso usando um comando costomizado', function(){
       cy.clock()  
       cy.fillMandatoryFieldsAndSubmit()
         cy.get('.success').should('be.visible')
@@ -150,7 +150,7 @@ describe('Central de Atendimento ao Cliente TAT', function() {
       cy.get('a').invoke('removeAttr','target').click()
       cy.url().should('include', '/privacy')
     })
-    it.only('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
+    it('exibe e esconde as mensagens de sucesso e erro usando o .invoke', () => {
       cy.get('.success')
         .should('not.be.visible')
         .invoke('show')
@@ -166,5 +166,10 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .invoke('hide')
         .should('not.be.visible')
     })
-    
+    it.only('preenche a area de texto usando o comando invoke', function(){
+      const longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
+      cy.get('textarea#open-text-area')
+        .invoke('val',longText)
+        .should('have.value', longText)
+    })
 })
