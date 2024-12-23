@@ -75,16 +75,17 @@ describe('Central de Atendimento ao Cliente TAT', function() {
           .should('have.value','')
    
     })
-    it('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
+    Cypress._.times(4, function() { 
+      it.only('exibe mensagem de erro ao submeter o formulário sem preencher os campos obrigatórios', function(){
       cy.clock()  
       cy.contains('button', 'Enviar')
           .click()
           .get('span.error').should('be.visible')
       cy.tick(THREE_SECONDS_IN_MS)
       .get('span.error').should('not.be.visible')
-
+      })
     })
-    it('envia formulário com sucesso usando um comando costomizado', function(){
+        it('envia formulário com sucesso usando um comando costomizado', function(){
       cy.clock()  
       cy.fillMandatoryFieldsAndSubmit()
         cy.get('.success').should('be.visible')
