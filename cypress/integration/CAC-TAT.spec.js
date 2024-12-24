@@ -166,10 +166,19 @@ describe('Central de Atendimento ao Cliente TAT', function() {
         .invoke('hide')
         .should('not.be.visible')
     })
-    it.only('preenche a area de texto usando o comando invoke', function(){
+    it('preenche a area de texto usando o comando invoke', function(){
       const longText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. "
       cy.get('textarea#open-text-area')
         .invoke('val',longText)
         .should('have.value', longText)
+    })
+    it.only('faz uma requisição HTTP', function(){
+      cy.request('https://cac-tat.s3.eu-central-1.amazonaws.com/index.html')
+        .should(function(response) {
+          const {status, statusText, body} = response
+          expect(status).to.equal(200)
+          expect(statusText).to.equal('OK')
+          expect(body).to.include('CAC TAT')
+        })
     })
 })
